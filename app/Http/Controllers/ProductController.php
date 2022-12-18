@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {   
-        return Product::all();
+        // return Product::all();
+        return response()->json("all data from laravel backend");
     }
 
     /**

@@ -15,7 +15,9 @@ class ProductController extends Controller
     public function index()
     {   
         // return Product::all();
-        return response()->json("all data from laravel backend");
+        // return response()->json("all data from laravel backend");
+        $products = Product::all()->sortBy('id');
+        return $products;
     }
 
     /**
@@ -42,7 +44,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        // return Product::find($id);
+        $product = Product::findOrfail($id);
+        return $product;
     }
 
     /**
@@ -67,7 +71,32 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        Product::destroy($id);
+    {   
+        // delete product method 1
+        // Product::destroy($id);
+
+        // delete product method 2
+        $product = Product::find($id);
+        $product->delete();
+
+        return $product;
+    }
+
+    public function softDelete($id){
+        $product = Product::find($id);
+        $product->delete();
+        return $product;
+    }
+
+    // read soft deleted products
+    public function readSoftDeletedProducts(){
+        $products = Product::onlyTrashed()->get();
+        return $products;
+    }
+
+    // restore soft deleted products
+    public function restoreSoftDeletedProduct($id){
+        $product = Product::onlyTrashed()->where('id', $id)->restore();
+        return $product;
     }
 }

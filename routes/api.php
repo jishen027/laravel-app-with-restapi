@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('products/softdelete', [ProductController::class, 'readSoftDeletedProducts']);
 Route::get('products/restore/{id}', [ProductController::class, 'restoreSoftDeletedProduct']);
+// force delete soft deleted products
+Route::delete('products/forceDelete/{id}', [ProductController::class, 'forceDeleteSoftDeletedProduct']);
 Route::get('products/{id}', [ProductController::class, 'show']);
 Route::get('products', [ProductController::class, 'index']);
 Route::post('register', [AuthController::class, 'register']);

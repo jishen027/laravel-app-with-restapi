@@ -45,4 +45,12 @@ class User extends Authenticatable
     public function products(){
         return $this->hasMany(Product::class, 'user_id');
     }
+
+    // role
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+    
 }

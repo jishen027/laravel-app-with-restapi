@@ -22,7 +22,8 @@ class Product extends Model
         'name',
         'slug',
         'description',
-        'price'
+        'price',
+        'user_id',
     ];
 
    protected $dates = [
@@ -31,5 +32,7 @@ class Product extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
-    } 
+    }
+
+    
 }

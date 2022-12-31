@@ -104,10 +104,25 @@ class ProductController extends Controller
      * Force delete soft deleted products
      * soft deleted products are not deleted from database, they are just marked as deleted
      * force delete will delete the soft deleted products from database
+     * 
      * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function forceDeleteSoftDeletedProduct($id){
         $product = Product::onlyTrashed()->where('id', $id)->forceDelete();
         return $product;
     }
+
+    /**
+     * Get user form product
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserFromProduct($id){
+        $product = Product::find($id);
+        return $product->user;
+    }
+
+    
 }

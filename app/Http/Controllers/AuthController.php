@@ -77,4 +77,20 @@ class AuthController extends Controller
             'status' => 201
         ];
     }
+
+    // find user by id and get user role
+    public function getUserRole($id)
+    {
+        $user = User::find($id);
+        $role = $user->roles;
+        return response()->json($role);
+    }
+
+    // get all users with role
+    public function getAllUsers()
+    {
+        $users = User::with('roles')->get();
+        return response()->json($users);
+    }
+
 }

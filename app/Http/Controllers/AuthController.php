@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -93,4 +94,11 @@ class AuthController extends Controller
         return response()->json($users);
     }
 
+    // get user's photo
+    public function getPhoto($id)
+    {
+        $user = User::find($id);
+        $photo = $user->photo;
+        return response()->json($photo);
+    }
 }

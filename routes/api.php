@@ -17,6 +17,7 @@ Route::get('products/user/{id}', [ProductController::class, 'getUserFromProduct'
 Route::get('products/{id}', [ProductController::class, 'show']);
 Route::get('products', [ProductController::class, 'index']);
 
+
 Route::post('products', [ProductController::class, 'store']);
 Route::put('products/{id}', [ProductController::class, 'update']);
 Route::delete('products/{id}', [ProductController::class, 'destroy']);  
@@ -40,21 +41,21 @@ Route::get('user/role/{id}', [AuthController::class, 'getUserRole']);
 // get all users with roles
 Route::get('users/roles', [AuthController::class, 'getAllUsers']);
 
-/**
- * Access the intermidiate table / pivot table
- */
- 
+Route::post('register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+
 
 /**
 * Countries
 */
 Route::get('countries', [CountryController::class, 'getCountries']);
+Route::get('countries/products/{id}', [CountryController::class, 'getProductsFromCountry']);
 Route::get('countries/{id}', [CountryController::class, 'getCountry']);
 Route::post('countries', [CountryController::class, 'addCountry']);
 Route::put('countries/{id}', [CountryController::class, 'updateCountry']);
 Route::delete('countries/{id}', [CountryController::class, 'deleteCountry']);
-// get all products from country
-Route::get('countries/products/{id}', [CountryController::class, 'getProductsFromCountry']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -66,5 +67,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 
+/**
+ * polymorphic
+ */
+// user has many photos
+Route::get('user/photos/{id}', [AuthController::class, 'getPhoto']);
+// get product photos
+Route::get('product/photos/{id}', [ProductController::class, 'getPhotos']);
 
 

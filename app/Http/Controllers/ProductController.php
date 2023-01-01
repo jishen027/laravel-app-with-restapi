@@ -124,5 +124,11 @@ class ProductController extends Controller
         return $product->user;
     }
 
-    
+    /**
+     * get product photos
+     */
+    public function getPhotos($id){
+        $product = Product::find($id);
+        return $product->photos;
+    }
 }

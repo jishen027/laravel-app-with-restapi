@@ -34,5 +34,15 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+    // photo relationship
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
+    }
+
+    // tags relationship
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }
